@@ -8,7 +8,7 @@ const MyBooking = () => {
     const { user } = useAuth();
 
     useEffect(() => {
-        fetch(`http://localhost:5000/myOrders/${user.email}`)
+        fetch(`https://radiant-wave-68069.herokuapp.com/myOrders/${user.email}`)
             .then(res => res.json())
             .then(data => setMyBookings(data))
     }, [user.email])

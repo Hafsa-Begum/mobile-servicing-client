@@ -3,7 +3,7 @@ import Carousel from 'react-material-ui-carousel';
 import { Box } from '@mui/material'
 import banner1 from '../../../assets/banner-1.png';
 import banner2 from '../../../assets/banner-2.jpg';
-import banner3 from '../../../assets/banner-3.jpeg';
+import banner3 from '../../../assets/banner-4.jpg';
 
 
 const banners = [
@@ -32,7 +32,7 @@ const Banner = () => {
         >
             {
                 banners.map((banner, i) => <Box key={i} >
-                    <img src={banner.image} style={{ width: '100%', height: '500px' }} alt="" />
+                    <img src={banner.image} style={{ width: '100%', height: '600px' }} alt="" />
                 </Box>)
             }
         </Carousel>

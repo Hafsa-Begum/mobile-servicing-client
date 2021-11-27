@@ -14,10 +14,26 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { NavLink, Outlet } from 'react-router-dom';
+import AddBoxRoundedIcon from '@mui/icons-material/AddBoxRounded';
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import ShoppingBasketIcon from '@mui/icons-material/ShoppingBasket';
+import PaymentsIcon from '@mui/icons-material/Payments';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+import StoreIcon from '@mui/icons-material/Store';
+import HomeIcon from '@mui/icons-material/Home';
+import LogoutIcon from '@mui/icons-material/Logout';
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import ReviewsIcon from '@mui/icons-material/Reviews';
+import PersonIcon from '@mui/icons-material/Person';
+import VerifiedUserSharpIcon from '@mui/icons-material/VerifiedUserSharp';
+import { Button } from '@mui/material';
+import useAuth from '../../../hooks/useAuth';
+import MuiButton from '../../../StyledComponents/MuiButton';
 
 const drawerWidth = 240;
 
 function Dashboard(props) {
+    const { user, admin, logOut } = useAuth();
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
 
@@ -28,55 +44,80 @@ function Dashboard(props) {
     const drawer = (
         <div>
             <Toolbar />
-            <Divider />
             <List>
+
+                {user.email && !admin && <>
+                    <ListItem><ListItemText> <span style={{ fontWeight: 500 }}>{user.displayName}</span><br /> </ListItemText></ListItem>
+                    <ListItem><ListItemText><IconButton><PersonIcon /></IconButton> User </ListItemText></ListItem>
+                </>
+                }
+
+                {
+                    user.email && admin &&
+                    <>
+                        <ListItem><ListItemText>  <span style={{ fontWeight: 500 }}>{user.displayName}</span></ListItemText></ListItem>
+                        <ListItem><ListItemText><IconButton><VerifiedUserSharpIcon /></IconButton>Admin </ListItemText></ListItem>
+                    </>
+                }
 
                 <ListItem button >
                     <ListItemIcon>
+                        <HomeIcon />
+                    </ListItemIcon>
+                    <ListItemText ><NavLink to='/home'>Home</NavLink></ListItemText>
+                </ListItem>
 
+                <Divider />
+
+
+                <ListItem button >
+                    <ListItemIcon>
+                        <ShoppingBasketIcon />
                     </ListItemIcon>
                     <ListItemText ><NavLink to='/dashboard/myBooking'>My Booking</NavLink></ListItemText>
                 </ListItem>
-                {/* <ListItem button >
-                    <ListItemIcon>
 
-                    </ListItemIcon>
-                    <ListItemText ><NavLink to='/dashboard/payment'>Payment</NavLink></ListItemText>
-                </ListItem> */}
                 <ListItem button >
                     <ListItemIcon>
-
+                        <ReviewsIcon />
                     </ListItemIcon>
                     <ListItemText ><NavLink to='/dashboard/addReview'>Review</NavLink></ListItemText>
                 </ListItem>
 
-            </List>
-            <Divider />
-            <List>
 
-                <ListItem button >
-                    <ListItemIcon>
+                <Divider />
+                {
+                    admin && <>
+                        <ListItem button >
+                            <ListItemIcon>
+                                <StoreIcon />
+                            </ListItemIcon>
+                            <ListItemText ><NavLink to='/dashboard/manageBookings'>Manage Bookings</NavLink></ListItemText>
+                        </ListItem>
+                        <ListItem button >
+                            <ListItemIcon>
+                                <SettingsApplicationsIcon />
+                            </ListItemIcon>
+                            <ListItemText ><NavLink to='/dashboard/manageServices'>Manage Services</NavLink></ListItemText>
+                        </ListItem>
+                        <ListItem button >
+                            <ListItemIcon>
+                                <AdminPanelSettingsIcon />
 
-                    </ListItemIcon>
-                    <ListItemText ><NavLink to='/dashboard/manageBookings'>Manage Bookings</NavLink></ListItemText>
-                </ListItem>
-                <ListItem button >
-                    <ListItemIcon>
-
-                    </ListItemIcon>
-                    <ListItemText ><NavLink to='/dashboard/manageServices'>Manage Services</NavLink></ListItemText>
-                </ListItem>
-                <ListItem button >
-                    <ListItemIcon>
-
-                    </ListItemIcon>
-                    <ListItemText ><NavLink to='/dashboard/makeAdmin'>Make Admin</NavLink></ListItemText>
-                </ListItem>
-                <ListItem button >
-                    <ListItemIcon>
-
-                    </ListItemIcon>
-                    <ListItemText ><NavLink to='/dashboard/addServices'>Add Services</NavLink></ListItemText>
+                            </ListItemIcon>
+                            <NavLink to='/dashboard/makeAdmin'>Make Admin</NavLink>
+                        </ListItem>
+                        <ListItem button >
+                            <ListItemIcon>
+                                <AddBoxRoundedIcon />
+                            </ListItemIcon>
+                            <ListItemText ><NavLink to='/dashboard/addServices'>Add Services</NavLink></ListItemText>
+                        </ListItem>
+                    </>
+                }
+                <Divider />
+                <ListItem>
+                    <MuiButton onClick={logOut}>Logout</MuiButton>
                 </ListItem>
 
             </List>

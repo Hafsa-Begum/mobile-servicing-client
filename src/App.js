@@ -18,7 +18,8 @@ import ManageBookings from './Pages/Dashboard/ManageBookings/ManageBookings';
 import ManageServices from './Pages/Dashboard/ManageServices/ManageServices';
 import AddServices from './Pages/Dashboard/AddServices/AddServices';
 import MakeAdmin from "./Pages/Dashboard/MakeAdmin/MakeAdmin";
-import Payment from "./Pages/Dashboard/Payment/Payment";
+import Payment from "./Pages/Payment/Payment";
+import AdminRoute from "./Pages/Login/AdminRoute/AdminRoute";
 
 function App() {
   return (
@@ -30,14 +31,14 @@ function App() {
             <Route path='/home' element={<Home />} />
             <Route path='/services' element={<Services />} />
             <Route path='/services/:serviceId' element={<PrivateRoute><ServiceDetail /></PrivateRoute>} />
+            <Route path='/payment' element={<Payment />} />
             <Route path='/dashboard' element={<PrivateRoute><Dashboard /></PrivateRoute>}>
               <Route path='/dashboard/myBooking' element={<MyBooking />} />
-              <Route path='/dashboard/payment/:bookingId' element={<Payment />} />
               <Route path='/dashboard/addReview' element={<AddReview />} />
-              <Route path='/dashboard/manageBookings' element={<ManageBookings />} />
-              <Route path='/dashboard/manageServices' element={<ManageServices />} />
-              <Route path='/dashboard/makeAdmin' element={<MakeAdmin />} />
-              <Route path='/dashboard/addServices' element={<AddServices />} />
+              <Route path='/dashboard/manageBookings' element={<AdminRoute><ManageBookings /></AdminRoute>} />
+              <Route path='/dashboard/manageServices' element={<AdminRoute><ManageServices /></AdminRoute>} />
+              <Route path='/dashboard/makeAdmin' element={<AdminRoute><MakeAdmin /></AdminRoute>} />
+              <Route path='/dashboard/addServices' element={<AdminRoute><AddServices /></AdminRoute>} />
 
 
             </Route>

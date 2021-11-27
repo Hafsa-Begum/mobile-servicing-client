@@ -48,7 +48,7 @@ export default function BookingModal({ openBooking, handleBookingClose, service 
             date
         }
         //send to the server
-        fetch('http://localhost:5000/orders', {
+        fetch('https://radiant-wave-68069.herokuapp.com/orders', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

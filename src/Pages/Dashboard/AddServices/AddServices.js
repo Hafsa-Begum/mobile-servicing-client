@@ -20,7 +20,7 @@ const AddServices = () => {
         formData.append('price', price);
         formData.append('image', image);
 
-        fetch('http://localhost:5000/services', {
+        fetch('https://radiant-wave-68069.herokuapp.com/services', {
             method: 'POST',
             body: formData
         })

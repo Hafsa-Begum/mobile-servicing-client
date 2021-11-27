@@ -7,7 +7,7 @@ const MakeAdmin = () => {
     const [email, setEmail] = useState('');
 
     const handleMakeAdmin = e => {
-        fetch('http://localhost:5000/users/admin', {
+        fetch('https://radiant-wave-68069.herokuapp.com/users/admin', {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

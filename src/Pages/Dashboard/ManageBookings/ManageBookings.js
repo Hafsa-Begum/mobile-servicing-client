@@ -11,16 +11,39 @@ import Swal from 'sweetalert2';
 
 const ManageBookings = () => {
     const [orders, setOrders] = useState([]);
+    const [control, setControl] = useState(false);
 
     useEffect(() => {
-        fetch('http://localhost:5000/orders')
+        fetch('https://radiant-wave-68069.herokuapp.com/orders')
             .then(res => res.json())
             .then(data => setOrders(data))
-    }, []);
+    }, [control]);
+
+    const handleUpdateStatus = id => {
+
+        fetch(`https://radiant-wave-68069.herokuapp.com/orders/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ status: 'pending' })
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                if (data.modifiedCount) {
+                    Swal.fire({
+                        icon: 'success',
+                        text: 'Wow, Your Booking is Shipped Successfully!'
+                    });
+                    setControl(!control)
+                }
+            })
+    }
 
     const handleOrderDelete = id => {
 
-        fetch(`http://localhost:5000/orders/${id}`, {
+        fetch(`https://radiant-wave-68069.herokuapp.com/orders/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -85,7 +108,7 @@ const ManageBookings = () => {
                                 <TableCell align="right">{service.address}</TableCell>
                                 <TableCell align="right">{service.status}</TableCell>
                                 <TableCell align="right">
-                                    <Button>Update</Button>
+                                    <Button onClick={() => handleUpdateStatus(service._id)}>Update</Button>
                                     <Button onClick={() => handleOrderDelete(service._id)}>Delete</Button>
                                 </TableCell>
                             </TableRow>

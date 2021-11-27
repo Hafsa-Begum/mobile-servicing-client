@@ -13,13 +13,13 @@ const ManageServices = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/services')
+        fetch('https://radiant-wave-68069.herokuapp.com/services')
             .then(res => res.json())
             .then(data => setServices(data))
     }, []);
 
     const handleServiceDelete = id => {
-        fetch(`http://localhost:5000/services/${id}`, {
+        fetch(`https://radiant-wave-68069.herokuapp.com/services/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -54,7 +54,8 @@ const ManageServices = () => {
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                             <TableCell component="th" scope="row">
-                                <img src={`data:image/*;base64,${service.image}`} style={{ width: '60px', height: '70px' }} alt="" />
+                                {/* <img src={`data:image/*;base64,${service.image}`} style={{ width: '60px', height: '70px' }} alt="" /> */}
+                                <img src={service.image} style={{ width: '60px', height: '70px' }} alt="" />
                             </TableCell>
                             <TableCell align="right">{service.name}</TableCell>
                             <TableCell align="right">{service.price}</TableCell>

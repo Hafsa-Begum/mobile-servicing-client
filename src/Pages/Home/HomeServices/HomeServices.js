@@ -3,6 +3,7 @@ import { makeStyles } from '@mui/styles';
 import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import MuiButton from '../../../StyledComponents/MuiButton';
+import Typing from 'react-typing-animation';
 
 const HomeServices = () => {
     const useStyles = makeStyles({
@@ -18,14 +19,19 @@ const HomeServices = () => {
     const [services, setServices] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/sixServices')
+        fetch('https://radiant-wave-68069.herokuapp.com/sixServices')
             .then(res => res.json())
             .then(data => setServices(data))
     }, [])
     return (
         <div style={{ backgroundColor: 'rgba(80, 118, 163, 1)' }}>
             <Container sx={{ pt: 5, pb: 10 }}>
-                <Typography sx={{ my: 5, pb: 5 }} variant="h3" color='#fff'>Our Services</Typography>
+                <Typography sx={{ my: 5, pb: 5 }} variant="h3" color='#fff'>
+                    <Typing loop={true}>
+                        <span>Our Services</span>
+                        <Typing.Backspace count={20} />
+                    </Typing>
+                </Typography>
                 <Grid container spacing={2}>
                     {
                         services?.map(({ name, description, price, image, _id }) => <Grid key={_id} xs={12} sm={6} md={4} lg={4}>
